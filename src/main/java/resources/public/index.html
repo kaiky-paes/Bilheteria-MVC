@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bilheteria</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #101219;
+            color: #f4f1ea;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            padding: 24px 6%;
+            border-bottom: 1px solid #30333e;
+        }
+
+        header span {
+            color: #ffca68;
+        }
+
+        main {
+            max-width: 1050px;
+            margin: auto;
+            padding: 44px 24px;
+        }
+
+        h1 {
+            font-size: clamp(32px, 5vw, 52px);
+            margin: 0 0 12px;
+            letter-spacing: -2px;
+        }
+
+        .intro {
+            color: #b9bdcb;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .filmes {
+            display: grid;
+            gap: 16px;
+            margin-bottom: 28px;
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .filme {
+            background: #1a1e29;
+            border: 2px solid #30333e;
+            border-radius: 14px;
+            display: block;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .filme:has(input:checked) {
+            border-color: #ffca68;
+        }
+
+        .poster {
+            background: #222e50;
+            display: grid;
+            place-items: center;
+            height: 150px;
+            font-size: 64px;
+        }
+
+        .codigo {
+            background: #33304e;
+        }
+
+        .oceano {
+            background: #163e48;
+        }
+
+        .filme-info {
+            padding: 16px;
+        }
+
+        .filme strong {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        small {
+            color: #b9bdcb;
+        }
+
+        input[type=radio] {
+            accent-color: #ffca68;
+        }
+
+        .painel {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .opcoes,
+        .bilhete {
+            background: #1a1e29;
+            border: 1px solid #30333e;
+            border-radius: 14px;
+            padding: 24px;
+        }
+
+        h2 {
+            margin: 0 0 20px;
+            font-size: 21px;
+        }
+
+        .campo {
+            display: block;
+            margin: 16px 0;
+        }
+
+        select,
+        input[type=number] {
+            background: #101219;
+            color: #fff;
+            font: inherit;
+            border: 1px solid #555b70;
+            border-radius: 8px;
+            margin-top: 8px;
+            padding: 12px;
+            width: 100%;
+        }
+
+        button {
+            background: #ffca68;
+            color: #17130b;
+            border: 0;
+            border-radius: 8px;
+            width: 100%;
+            font: bold 16px Arial;
+            cursor: pointer;
+            padding: 15px
+        }
+
+        button:hover {
+            background: #ffda94;
+        }
+
+        button:disabled {
+            opacity: .6;
+            cursor: wait;
+        }
+
+        :focus-visible {
+            outline: 3px solid #ffca68;
+            outline-offset: 4px;
+        }
+
+        .bilhete {
+            border-top: 4px solid #ffca68;
+        }
+
+        #detalhes {
+            line-height: 1.7;
+            color: #b9bdcb;
+            min-height: 55px;
+            white-space: pre-line;
+        }
+
+        #total {
+            color: #ffca68;
+            margin: 20px, 0;
+            font-size: 42px;
+            font-weight: bold;
+        }
+
+        #aviso {
+            min-height: 24px;
+            color: #ffb2ad;
+        }
+
+        footer {
+            margin-top: 30px;
+            font-size: 13px;
+            color: #9ca2b5;
+        }
+
+        @media(max-width: 650px) {
+            .filmes {
+                grid-template-columns: 1fr;
+            }
+
+            .filme {
+                display: grid;
+                grid-template-columns: 90px 1fr;
+            }
+
+            .poster {
+                height: 100%;
+                font-size: 40px;
+            }
+
+            .painel {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>CINE <span>ANCHIETA</span></header>
+    <main>
+        <h1>Sua próxima sessão.</h1>
+        <p class="intro">Escolha o filme e calcule seus ingressos. <br> Inteira R$ 30,00 | Meia R$ 15,00</p>
+        <form id="formulario">
+            <div class="filmes" role="group" aria-label="Escolha um filme">
+                <!-- filme 01 -->
+                <label class="filme">
+                    <div class="poster" aria-hidden="true">&#129680;</div>
+                    <div class="filme-info">
+                        <input type="radio" name="filme" value="orbita" checked>
+                        <strong>Além da Órbita</strong>
+                        <small>Ficção científica - 118 min</small>
+                    </div>
+                </label>
+
+                <!-- filme 02 -->
+                <label class="filme">
+                    <div class="poster codigo" aria-hidden="true">&#128272;</div>
+                    <div class="filme-info">
+                        <input type="radio" name="filme" value="codigo">
+                        <strong>Código Secreto</strong>
+                        <small>Suspense - 104 min</small>
+                    </div>
+                </label>
+
+                <!-- filme 03 -->
+                <label class="filme">
+                    <div class="poster oceano" aria-hidden="true">&#127754;</div>
+                    <div class="filme-info">
+                        <input type="radio" name="filme" value="oceano">
+                        <strong>Oceano</strong>
+                        <small>Aventura - 96 min</small>
+                    </div>
+                </label>
+            </div>
+
+            <div class="painel">
+                <section class="opcoes">
+                    <h2>Monte sua sessão</h2>
+                    <label class="campo">Tipo de Ingresso
+                        <select name="tipo">
+                            <option value="inteira">Inteira</option>
+                            <option value="meia">Meia-entrada</option>
+                        </select>
+                    </label>
+
+                    <label class="campo">Quantidade de ingressos
+                        <input type="number" name="quantidade" min="1" max="10" step="1" value="1" required>
+                    </label>
+
+                    <button id="calcular" type="submit">Calcular ingressos</button>
+
+                    <p id="aviso" role="alert"></p>
+                </section>
+
+                <section class="bilhete" aria-live="polite">
+                    <h2>Resumo da sessão</h2>
+                    <p id="detalhes">Seu orçamento aparecerá aqui após o cálculo</p>
+                    <p id="total">-</p>
+                    <small>Sem Reservas.</small>
+                </section>
+            </div>
+        </form>
+
+        <footer>Cine Anchieta - Bilheteria</footer>
+    </main>
+
+    <script></script>
+</body>
+
+</html>
